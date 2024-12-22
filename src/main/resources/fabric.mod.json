@@ -75,10 +75,8 @@
       "etherology:visited"
     ],
     "mc-publish": {
-      "name": "Etherology ${short_version}",
-      "version-type": "beta",
       "game-versions": [
-        "1.21"
+        "1.21", "1.21.1"
       ]
     }
   },

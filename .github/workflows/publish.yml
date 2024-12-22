@@ -31,6 +31,13 @@ jobs:
       - name: build
         run: ./gradlew build
 
+      - name: extract foobar from gradle.properties
+        id: get-foobar
+        run: |
+          value=$(grep '^short_version=' gradle.properties | cut -d'=' -f2)
+          echo "short_version=$value"
+          echo "short_version=$value" >> $GITHUB_ENV
+
       - name: publish to Modrinth and CurseForge
         uses: Kir-Antipov/mc-publish@v3.3
         with:
@@ -40,4 +47,6 @@ jobs:
           curseforge-id: 1015414
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
+          name: Etherology ${{ env.short_version }}
           changelog-file: CHANGELOG.*
+          version-type: beta
