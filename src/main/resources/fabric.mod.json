@@ -77,6 +77,9 @@
     "mc-publish": {
       "game-versions": [
         "1.21", "1.21.1"
+      ],
+      "dependencies": [
+        "owo#{modrinth:owo-lib}{curseforge:owo-lib}"
       ]
     }
   },
