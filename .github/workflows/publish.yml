@@ -31,8 +31,8 @@ jobs:
       - name: build
         run: ./gradlew build
 
-      - name: extract foobar from gradle.properties
-        id: get-foobar
+      - name: extract short_version from gradle.properties
+        id: get-short-version
         run: |
           value=$(grep '^short_version=' gradle.properties | cut -d'=' -f2)
           echo "short_version=$value"
@@ -50,3 +50,6 @@ jobs:
           name: Etherology ${{ env.short_version }}
           changelog-file: CHANGELOG.*
           version-type: beta
+          game-versions: |
+            1.21
+            1.21.1
