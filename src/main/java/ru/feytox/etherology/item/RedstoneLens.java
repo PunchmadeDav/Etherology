@@ -74,7 +74,9 @@ public class RedstoneLens extends LensItem {
     @Override
     public boolean onChargeStop(World world, LivingEntity entity, ItemData<LensComponent> lensData, ItemStack lensStack, int holdTicks, Supplier<Hand> handGetter) {
         if (world.isClient || !(world instanceof ServerWorld serverWorld)) {
-            entity.swingHand(handGetter.get());
+            var hand = handGetter.get();
+            if (hand != null)
+                entity.swingHand(hand);
             return false;
         }
 
