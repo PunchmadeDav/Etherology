@@ -106,11 +106,11 @@ public class StaffLensesScreen extends Screen {
         if (client == null || client.world == null) return;
         renderTick(delta);
 
-        float percent = Math.min(progressTicks / MENU_OPEN_DELAY, 1.0f);
-        float progress = getProgress(percent);
-        float circleScale = 0.75f;
-        float centerX = width / 2.0f;
-        float centerY = height / 2.0f;
+        var percent = Math.min(progressTicks / MENU_OPEN_DELAY, 1.0f);
+        var progress = getProgress(percent);
+        var circleScale = 0.75f;
+        var centerX = width / 2.0f;
+        var centerY = height / 2.0f;
 
         if (percent == 1.0f) updateMouse(centerX, centerY, mouseX, mouseY, progress, circleScale);
         renderCircle(context, centerX, centerY, progress, circleScale);
@@ -163,8 +163,9 @@ public class StaffLensesScreen extends Screen {
         if (lensWidgets == null || lensWidgets.isEmpty()) return;
 
         for (val widget : lensWidgets) {
-            selectedStack = widget.updateMouse(mouseX, mouseY, centerX, centerY, progress, circleScale);
-            if (selectedStack != null) break;
+            var selectedLensStack = widget.updateMouse(mouseX, mouseY, centerX, centerY, progress, circleScale);
+            if (selectedStack == null)
+                selectedStack = selectedLensStack;
         }
 
         if (selectedStack == null) {

@@ -99,8 +99,8 @@ public class LensWidget {
     }
 
     private boolean isHovered(int mouseX, int mouseY, float centerX, float centerY, float progress, float circleScale) {
-        float dx = getX(progress, circleScale) - 8.0f * progress;
-        float dy = getY(progress, circleScale) - 8.0f * progress;
+        var dx = getX(progress, circleScale) - 8.0f * progress;
+        var dy = getY(progress, circleScale) - 8.0f * progress;
         return StaffLensesScreen.isInBox(mouseX, mouseY, centerX+dx, centerY+dy, 16.0f*progress, 16.0f*progress);
     }
 
