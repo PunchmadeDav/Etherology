@@ -80,7 +80,7 @@
       ],
       "dependencies": [
         "owo{modrinth:owo-lib}{curseforge:owo-lib}",
-        "cardinal-components-base{modrinth:cardinal-components-api}{curseforge:cardinal-components-api}#(ignore:modrinth)(ignore:curseforge)",
+        "cardinal-components-base{modrinth:cardinal-components-api}{curseforge:cardinal-components-api}",
         "cardinal-components-entity#(ignore:modrinth)(ignore:curseforge)",
         "cardinal-components-chunk#(ignore:modrinth)(ignore:curseforge)"
       ]
