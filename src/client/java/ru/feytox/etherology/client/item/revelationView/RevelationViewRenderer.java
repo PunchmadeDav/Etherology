@@ -1,13 +1,9 @@
 package ru.feytox.etherology.client.item.revelationView;
 
 import lombok.experimental.UtilityClass;
-import lombok.val;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -57,9 +53,9 @@ public class RevelationViewRenderer {
 
     @Nullable
     private static RevelationViewData.Aspects getSortedAspects(World world, HitResult hitResult) {
-        val data = RevelationAspectProvider.getData(world, hitResult);
+        var data = RevelationAspectProvider.getData(world, hitResult);
         if (data == null) return null;
-        val aspects = data.getFirst();
+        var aspects = data.getFirst();
         Integer limit = data.getSecond();
         if (aspects == null || limit == null) return null;
 
@@ -67,14 +63,14 @@ public class RevelationViewRenderer {
     }
 
     public static void registerRendering() {
-        WorldRenderEvents.LAST.register(RevelationViewRenderer::renderAspects);
+        WorldRenderEvents.LAST.register(RevelationViewRenderer::renderBlockRevelationOverlay);
     }
 
-    private static void renderAspects(WorldRenderContext context) {
+    private static void renderBlockRevelationOverlay(WorldRenderContext context) {
         if (data == null || data.isEmpty() || targetPos == null || offsetVec == null) return;
-        MinecraftClient client = MinecraftClient.getInstance();
-        ClientWorld world = context.world();
-        HitResult hitResult = client.crosshairTarget;
+        var client = MinecraftClient.getInstance();
+        var world = context.world();
+        var hitResult = client.crosshairTarget;
         if (world == null || hitResult == null || !RevelationViewItem.isEquipped(client.player)) return;
 
         if (isNewTarget(hitResult)) {
@@ -83,14 +79,14 @@ public class RevelationViewRenderer {
         }
 
         progress = MathHelper.lerp(0.1f * context.tickCounter().getTickDelta(false), progress, 1.0f);
-        MatrixStack matrices = context.matrixStack();
+        var matrices = context.matrixStack();
         if (data == null || data.isEmpty() || targetPos == null || offsetVec == null || matrices == null) return;
 
         matrices.push();
 
-        Camera camera = context.camera();
-        Vec3d cameraPos = camera.getPos();
-        Vec3d renderPos = targetPos.subtract(cameraPos).add(offsetVec.multiply(progress));
+        var camera = context.camera();
+        var cameraPos = camera.getPos();
+        var renderPos = targetPos.subtract(cameraPos).add(offsetVec.multiply(progress));
         matrices.translate(renderPos.x, renderPos.y, renderPos.z);
         matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees(camera.getYaw()));
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(camera.getPitch()));

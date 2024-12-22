@@ -105,10 +105,11 @@ public abstract class RevelationViewData {
 
             var etherText = String.format("%.1f / %.1f", ether, maxEther);
             var textWidth = client.textRenderer.getWidth(etherText);
-            matrices.translate(-textWidth/2f - 8f, 0, 0);
+            // offset = half of text width + half of icon width + 1 (half of gap)
+            matrices.translate(-textWidth/2f - 9, 0, 0);
 
             matrices.push();
-            matrices.translate(0, 0, -8);
+            matrices.translate(0, -5, 0);
             matrices.scale(-1, -1, 1);
             RenderSystem.enableBlend();
             RenderSystem.disableDepthTest();
@@ -117,7 +118,7 @@ public abstract class RevelationViewData {
             matrices.pop();
 
             var immediate = VertexConsumerProvider.immediate(((TessellatorAccessor) Tessellator.getInstance()).getAllocator());
-            client.textRenderer.draw(etherText, 16, 0, 0xFFFFFF, false, matrices.peek().getPositionMatrix(), immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
+            client.textRenderer.draw(etherText, 18, 0, 0xFFFFFF, false, matrices.peek().getPositionMatrix(), immediate, TextRenderer.TextLayerType.SEE_THROUGH, 0, 15728880);
             immediate.draw();
 
             matrices.pop();
