@@ -2,10 +2,12 @@ package ru.feytox.etherology.mixin;
 
 import com.github.crimsondawn45.fabricshieldlib.initializers.FabricShieldLib;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import ru.feytox.etherology.Etherology;
 
+@Debug(export = true, print = true)
 @Mixin(value = FabricShieldLib.class, remap = false)
 public class FabricShieldLibMixin {
 
