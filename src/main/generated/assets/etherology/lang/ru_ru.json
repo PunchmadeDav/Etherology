@@ -169,7 +169,7 @@
   "item.minecraft.tipped_arrow.effect.vital_energy": "Стрела духовного восстановления",
   "lore.etherology.primoshard": "%s",
   "lore.etherology.spill_barrel.empty": "Пусто",
-  "lore.etherology.spill_barrel.filled": "Наполнена \"%s%s\" в объёме %dx",
+  "lore.etherology.spill_barrel.filled": "Наполнена \"%s\" в объёме %dx",
   "subtitles.etherology.armillary_matrix_work": "Армиллярная матрица шумит",
   "subtitles.etherology.deflect": "Отражение снаряда щитом",
   "subtitles.etherology.hammer_damage": "Удар молота",

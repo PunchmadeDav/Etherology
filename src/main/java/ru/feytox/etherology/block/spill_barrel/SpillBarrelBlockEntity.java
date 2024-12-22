@@ -10,6 +10,7 @@ import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
@@ -26,6 +27,9 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 import ru.feytox.etherology.registry.block.EBlocks;
 import ru.feytox.etherology.util.misc.TickableBlockEntity;
+
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 public class SpillBarrelBlockEntity extends TickableBlockEntity implements ImplementedInventory, SidedInventory, Nameable {
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(16, ItemStack.EMPTY);
@@ -104,20 +108,36 @@ public class SpillBarrelBlockEntity extends TickableBlockEntity implements Imple
 
     @Nullable
     public static MutableText getPotionInfo(ItemStack potionStack, long potionCount, boolean withCustomName, Text customName) {
+        if (withCustomName)
+            return Text.translatable("lore.etherology.spill_barrel.filled", customName, potionCount);
+
         val barrelContent = potionStack.get(DataComponentTypes.POTION_CONTENTS);
         if (barrelContent == null) return null;
 
-        StatusEffectInstance statusEffectInstance = barrelContent.getEffects().iterator().next();
-        Text effectText = Text.translatable(statusEffectInstance.getTranslationKey());
-        Text levelText = Text.translatable("potion.potency." + statusEffectInstance.getAmplifier());
-        if (!levelText.getString().isEmpty()) {
-            levelText = Text.of(" " + levelText.getString());
+        var effectsText = getEffectsText(barrelContent.getEffects());
+        return Text.translatable("lore.etherology.spill_barrel.filled", effectsText.getString(), potionCount);
+    }
+
+    private static MutableText getEffectsText(Iterable<StatusEffectInstance> effects) {
+        var textsIterator = StreamSupport.stream(effects.spliterator(), false)
+                .map(effect -> {
+                    var effectText = Text.translatable(effect.getTranslationKey());
+                    var levelText = Text.translatable("potion.potency." + effect.getAmplifier());
+                    if (!levelText.getString().isEmpty())
+                        effectText.append(" ").append(levelText);
+                    return effectText;
+                })
+                .iterator();
+        if (!textsIterator.hasNext())
+            return Text.translatable("block.minecraft.water");
+
+        var result = textsIterator.next();
+        while (textsIterator.hasNext()) {
+            result.append(" & ");
+            result.append(textsIterator.next());
         }
 
-        if (withCustomName) return Text.translatable("lore.etherology.spill_barrel.filled", customName, "", potionCount);
-
-        return Text.translatable("lore.etherology.spill_barrel.filled",
-                effectText.getString(), levelText.getString(), potionCount);
+        return result;
     }
 
     @Override

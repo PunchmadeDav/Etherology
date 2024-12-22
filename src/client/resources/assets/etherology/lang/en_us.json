@@ -169,7 +169,7 @@
   "item.minecraft.tipped_arrow.effect.vital_energy": "Arrow of Vital Energy",
   "lore.etherology.primoshard": "%s",
   "lore.etherology.spill_barrel.empty": "Empty",
-  "lore.etherology.spill_barrel.filled": "Filled with a \"%s%s\" in the amount of %dx",
+  "lore.etherology.spill_barrel.filled": "Filled with a \"%s\" in the amount of %dx",
   "subtitles.etherology.armillary_matrix_work": "Armillary Sphere Noise",
   "subtitles.etherology.deflect": "Shield deflected the projectile",
   "subtitles.etherology.hammer_damage": "Hammer Blow",
