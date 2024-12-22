@@ -1,3 +1,5 @@
 ## Fixed
-- Now sources are split, so multiplayer should work properly (#5, #16)
-- Added dependencies to fabric.mod.json (#12, #25)
+- Ether icon in Revelation View overlay (#6)
+- Lens menu multiple tooltips bug (#8)
+- Problems with Spill Barrel (#10)
+- Crash on multiple Staff stream use (#14)
