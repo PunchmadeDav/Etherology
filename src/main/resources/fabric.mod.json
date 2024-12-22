@@ -63,13 +63,24 @@
     "cardinal-components-entity": "*",
     "cardinal-components-chunk": "*"
   },
+  "suggests": {
+    "modmenu": "*",
+    "rei": "*"
+  },
   "custom": {
     "cardinal-components": [
       "etherology:corruption",
       "etherology:ether",
       "etherology:teldecore",
       "etherology:visited"
-    ]
+    ],
+    "mc-publish": {
+      "name": "Etherology ${short_version}",
+      "version-type": "beta",
+      "game-versions": [
+        "1.21"
+      ]
+    }
   },
   "accessWidener" : "etherology.accesswidener"
 }
