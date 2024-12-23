@@ -44,7 +44,7 @@ dependencies {
     modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${gecko_version}")
     implementation("com.eliotlash.mclib:mclib:20")
     modImplementation("dev.emi:trinkets:${project.trinkets_version}")
-    modImplementation("com.terraformersmc:biolith-fabric:${project.biolith_version}")
+    modImplementation("com.terraformersmc:biolith:${project.biolith_version}")
     modCompileOnly modRuntimeOnly ("com.terraformersmc:modmenu:${project.mod_menu}"), { exclude(group: "net.fabricmc.fabric-api") }
     modImplementation("com.github.CrimsonDawn45:Fabric-Shield-Lib:v${project.fabric_shield_lib_version}")
     modImplementation("maven.modrinth:midnightlib:${project.midnightlib_version}")
