@@ -12,7 +12,8 @@ repositories {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
-            includeGroup("software.bernie.geckolib")
+                includeGroupByRegex("software\\.bernie.*")
+                includeGroup("com.eliotlash.mclib")
         }
     }
     maven { url = 'https://maven.wispforest.io' }
@@ -41,6 +42,7 @@ dependencies {
     modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-chunk:${project.cca_version}")
 
     modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${gecko_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
     modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     modImplementation("com.terraformersmc:biolith-fabric:${project.biolith_version}")
     modCompileOnly modRuntimeOnly ("com.terraformersmc:modmenu:${project.mod_menu}"), { exclude(group: "net.fabricmc.fabric-api") }
