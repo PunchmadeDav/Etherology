@@ -51,6 +51,8 @@ public class ArmorItems {
     public static final Item EBONY_LEGGINGS = register("ebony_leggings", createArmor(EbonyArmorItem::new, EBONY_MATERIAL, LEGGINGS));
     public static final Item EBONY_BOOTS = register("ebony_boots", createArmor(EbonyArmorItem::new, EBONY_MATERIAL, BOOTS));
 
+    public static final Item[] ARMOR_ITEMS = {ETHRIL_HELMET, ETHRIL_CHESTPLATE, ETHRIL_LEGGINGS, ETHRIL_BOOTS, EBONY_HELMET, EBONY_CHESTPLATE, EBONY_LEGGINGS, EBONY_BOOTS};
+
     // trinkets
     public static final Item REVELATION_VIEW = register("revelation_view", new RevelationViewItem());
 
