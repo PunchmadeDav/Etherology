@@ -27,6 +27,9 @@ It's no secret that this mod was inspired by another similar project - *Thaumcra
 ## Contributing
 This project is under development and a lot of things can be changed. See a bug, an issue or want to fix/refactor something? We welcome any contributions to improve **Etherology**.
 
+## Mod guide
+[Guide on Github Wiki](https://github.com/feytox/Etherology/wiki/Guide)
+
 ## Discord
 - [Developer's Server](https://discord.gg/U23C6ewP2X)
 - [Author's Server](https://discord.com/invite/HruRuhw)
