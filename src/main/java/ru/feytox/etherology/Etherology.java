@@ -21,6 +21,7 @@ import ru.feytox.etherology.registry.entity.EntityRegistry;
 import ru.feytox.etherology.registry.item.EItemGroups;
 import ru.feytox.etherology.registry.item.EItems;
 import ru.feytox.etherology.registry.misc.*;
+import ru.feytox.etherology.registry.particle.EtherParticleTypes;
 import ru.feytox.etherology.registry.world.WorldGenRegistry;
 import ru.feytox.etherology.util.delayedTask.ServerTaskManager;
 
@@ -56,6 +57,7 @@ public class Etherology implements ModInitializer {
         EffectsRegistry.registerAll();
         ComponentTypes.registerAll();
         ForestLanternBlock.registerJumpEvent();
+        EtherParticleTypes.registerAll();
 
         ServerWorldEvents.LOAD.register((server, world) -> loadedWorlds.add(world));
         ServerWorldEvents.UNLOAD.register((server, world) -> loadedWorlds.remove(world));

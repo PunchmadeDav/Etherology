@@ -11,6 +11,7 @@ import ru.feytox.etherology.util.misc.EIdentifier;
 
 @UtilityClass
 public class EtherParticleTypes {
+
     public static final FeyParticleType<LightParticleEffect> LIGHT = register("light", LightParticleEffect::new);
     public static final FeyParticleType<SimpleParticleEffect> STEAM = register("steam", SimpleParticleEffect::new);
     public static final FeyParticleType<SparkParticleEffect> SPARK = register("spark", SparkParticleEffect::new);
@@ -37,4 +38,6 @@ public class EtherParticleTypes {
         FeyParticleType<T> particleType = new FeyParticleType<>(false, dummyConstructor);
         return Registry.register(Registries.PARTICLE_TYPE, EIdentifier.of(name), particleType);
     }
+
+    public static void registerAll() {}
 }
