@@ -11,6 +11,7 @@
     "BlocksAccessor",
     "BlockTexturePoolMixin",
     "BoatEntityMixin",
+    "BoatEntityTypeMixin",
     "BundleContentsComponentAccessor",
     "ChestBoatEntityMixin",
     "DataAccessor",
