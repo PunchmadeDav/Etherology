@@ -32,10 +32,10 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "chance": 0.02,
+                  "chance": 0.05,
                   "condition": "etherology:random_chance_with_fortune",
                   "enchantment": "minecraft:fortune",
-                  "fortune_multiplier": 0.02
+                  "fortune_multiplier": 0.05
                 }
               ],
               "functions": [

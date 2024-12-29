@@ -129,7 +129,7 @@ public class PlacedFeaturesGen {
                 BiomePlacementModifier.of()
         );
         register(context, ATTRAHITE, lookup.getOrThrow(ConfiguredFeaturesGen.ATTRAHITE),
-                RarityFilterPlacementModifier.of(10),
+                RarityFilterPlacementModifier.of(5),
                 SquarePlacementModifier.of(),
                 HeightRangePlacementModifier.of(UniformHeightProvider.create(YOffset.fixed(-58), YOffset.fixed(-8))),
                 BiomePlacementModifier.of()
