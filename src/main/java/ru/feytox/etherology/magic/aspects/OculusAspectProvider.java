@@ -17,17 +17,17 @@ public interface OculusAspectProvider {
         if (hitResult instanceof BlockHitResult blockHitResult) {
             var pos = blockHitResult.getBlockPos();
             var state = world.getBlockState(pos);
-            return AspectsLoader.getAspects(world, state.getBlock().asItem().getDefaultStack(), false).orElse(null);
+            return AspectsLoader.getAspects(world, state.getBlock().asItem().getDefaultStack(), false, false).orElse(null);
         }
 
         if (!(hitResult instanceof EntityHitResult entityHitResult)) return null;
 
         var entity = entityHitResult.getEntity();
         if (entity instanceof ItemEntity itemEntity) {
-            return AspectsLoader.getAspects(world, itemEntity.getStack(), false).orElse(null);
+            return AspectsLoader.getAspects(world, itemEntity.getStack(), false, false).orElse(null);
         }
 
-        return AspectsLoader.getEntityAspects(world, entity).orElse(null);
+        return AspectsLoader.getEntityAspects(world, entity, false).orElse(null);
     }
 
     @Nullable

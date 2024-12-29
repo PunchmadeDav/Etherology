@@ -33,6 +33,6 @@ public interface RevelationAspectProvider {
         Entity entity = entityHitResult.getEntity();
         if (!(entity instanceof ItemFrameEntity itemFrame)) return null;
 
-        return Pair.of(AspectsLoader.getAspects(world, itemFrame.getHeldItemStack(), false).orElse(null), -1);
+        return Pair.of(AspectsLoader.getAspects(world, itemFrame.getHeldItemStack(), false, false).orElse(null), -1);
     }
 }

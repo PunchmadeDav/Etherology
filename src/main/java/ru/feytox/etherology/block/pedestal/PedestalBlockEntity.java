@@ -178,7 +178,7 @@ public class PedestalBlockEntity extends TickableBlockEntity
     @Override
     public AspectContainer getRevelationAspects(World world) {
         if (items.getFirst().isEmpty()) return null;
-        return AspectsLoader.getAspects(world, items.getFirst(), false).orElse(null);
+        return AspectsLoader.getAspects(world, items.getFirst(), false, false).orElse(null);
     }
 
     @Override

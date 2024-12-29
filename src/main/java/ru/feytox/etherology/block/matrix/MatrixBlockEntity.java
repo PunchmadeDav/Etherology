@@ -224,7 +224,7 @@ public class MatrixBlockEntity extends TickableBlockEntity implements Implemente
         }
         val container = stackStream
                 .filter(stack -> !stack.isEmpty())
-                .map(stack -> AspectsLoader.getAspects(world, stack, false))
+                .map(stack -> AspectsLoader.getAspects(world, stack, false, true))
                 .filter(Optional::isPresent).map(Optional::get)
                 .reduce(AspectContainer::add).orElse(null);
 

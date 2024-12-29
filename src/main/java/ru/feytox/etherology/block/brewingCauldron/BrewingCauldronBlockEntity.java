@@ -184,7 +184,7 @@ public class BrewingCauldronBlockEntity extends TickableBlockEntity implements I
         AtomicInteger count = new AtomicInteger();
         items.stream()
                 .filter(stack -> !stack.isEmpty())
-                .map(stack -> AspectsLoader.getAspects(world, stack, true).orElse(null))
+                .map(stack -> AspectsLoader.getAspects(world, stack, true, true).orElse(null))
                 .filter(Objects::nonNull)
                 .forEach(itemAspects -> {
                     count.addAndGet(1);

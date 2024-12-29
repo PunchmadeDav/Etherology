@@ -25,25 +25,30 @@ import java.util.function.BiConsumer;
 
 public class AspectsLoader {
 
+    // TODO: load aspects on client/server load
     @Nullable
     private static ImmutableMap<AspectContainerId, AspectContainer> cache = null;
     @Nullable
     private static CompletableFuture<ImmutableMap<AspectContainerId, AspectContainer>> cacheFuture = null;
 
-    private static Optional<AspectContainer> get(World world, AspectContainerId id) {
-        Map<AspectContainerId, AspectContainer> cache = getCache(world, false);
+    private static Optional<AspectContainer> get(World world, AspectContainerId id, boolean force) {
+        Map<AspectContainerId, AspectContainer> cache = getCache(world, force);
         if (cache == null) return Optional.empty();
 
         return Optional.ofNullable(cache.get(id));
     }
     
-    public static Optional<AspectContainer> getAspects(World world, ItemStack stack, boolean multiplyCount) {
-        if (stack.getItem() instanceof PotionItem) return getPotionAspects(world, stack);
-        if (stack.getItem() instanceof TippedArrowItem) return getTippedAspects(world, stack);
-        AspectContainer itemAspects = getAspects(world, stack).orElse(null);
-        if (itemAspects == null) return Optional.empty();
+    public static Optional<AspectContainer> getAspects(World world, ItemStack stack, boolean multiplyCount, boolean force) {
+        if (stack.getItem() instanceof PotionItem)
+            return getPotionAspects(world, stack, force);
+        if (stack.getItem() instanceof TippedArrowItem)
+            return getTippedAspects(world, stack, force);
+        AspectContainer itemAspects = getAspects(world, stack, force).orElse(null);
+        if (itemAspects == null)
+            return Optional.empty();
 
-        if (multiplyCount) itemAspects = itemAspects.map(value -> value * stack.getCount());
+        if (multiplyCount)
+            itemAspects = itemAspects.map(value -> value * stack.getCount());
         return Optional.of(itemAspects);
     }
 
@@ -58,11 +63,11 @@ public class AspectsLoader {
         Etherology.ELOGGER.warn("Aspects were not loaded during the addition of REI/EMI entries.");
     }
 
-    private static Optional<AspectContainer> getAspects(World world, ItemStack stack) {
-        return get(world, AspectContainerId.of(Registries.ITEM.getId(stack.getItem()), AspectContainerType.ITEM));
+    private static Optional<AspectContainer> getAspects(World world, ItemStack stack, boolean force) {
+        return get(world, AspectContainerId.of(Registries.ITEM.getId(stack.getItem()), AspectContainerType.ITEM), force);
     }
 
-    public static Optional<AspectContainer> getPotionAspects(World world, ItemStack potionStack) {
+    public static Optional<AspectContainer> getPotionAspects(World world, ItemStack potionStack, boolean force) {
         AspectContainerType type = AspectContainerType.POTION;
         if (potionStack.getItem() instanceof SplashPotionItem) type = AspectContainerType.SPLASH_POTION;
         if (potionStack.getItem() instanceof LingeringPotionItem) type = AspectContainerType.LINGERING_POTION;
@@ -73,21 +78,21 @@ public class AspectsLoader {
         Identifier id = Registries.POTION.getId(potion.value());
         if (id == null) return Optional.empty();
 
-        return get(world, AspectContainerId.of(id, type));
+        return get(world, AspectContainerId.of(id, type), force);
     }
 
-    public static Optional<AspectContainer> getTippedAspects(World world, ItemStack tippedStack) {
+    public static Optional<AspectContainer> getTippedAspects(World world, ItemStack tippedStack, boolean force) {
         val potion = tippedStack.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT).potion().orElse(null);
         if (potion == null) return Optional.empty();
 
         Identifier id = Registries.POTION.getId(potion.value());
         if (id == null) return Optional.empty();
 
-        return get(world, AspectContainerId.of(id, AspectContainerType.TIPPED_ARROW));
+        return get(world, AspectContainerId.of(id, AspectContainerType.TIPPED_ARROW), force);
     }
 
-    public static Optional<AspectContainer> getEntityAspects(World world, Entity entity) {
-        return get(world, AspectContainerId.of(Registries.ENTITY_TYPE.getId(entity.getType()), AspectContainerType.ENTITY));
+    public static Optional<AspectContainer> getEntityAspects(World world, Entity entity, boolean force) {
+        return get(world, AspectContainerId.of(Registries.ENTITY_TYPE.getId(entity.getType()), AspectContainerType.ENTITY), force);
     }
 
     public static void clearCache() {

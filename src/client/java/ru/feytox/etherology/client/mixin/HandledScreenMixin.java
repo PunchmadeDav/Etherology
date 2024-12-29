@@ -39,7 +39,7 @@ public class HandledScreenMixin {
         if (focusedSlot == null || !focusedSlot.hasStack() || !(cursorStack.getItem() instanceof OculusItem)) return;
 
         ItemStack focusedStack = focusedSlot.getStack();
-        AspectContainer aspects = AspectsLoader.getAspects(client.world, focusedStack, false).orElse(null);
+        AspectContainer aspects = AspectsLoader.getAspects(client.world, focusedStack, false, false).orElse(null);
         if (aspects == null || aspects.isEmpty()) return;
 
         List<TooltipComponent> tooltipComponents = new ArrayList<>();
