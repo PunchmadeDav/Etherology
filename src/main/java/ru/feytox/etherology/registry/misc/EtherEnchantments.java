@@ -7,6 +7,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registerable;
@@ -77,7 +78,9 @@ public class EtherEnchantments {
         ((EntityHitResultAccessor) entityHitResult).setEntity(projectile);
         projectile.discard();
         world.spawnEntity(newProjectile);
-        newProjectile.setOwner(target);
+
+        var newOwner = projectile instanceof TridentEntity ? projectile.getOwner() : target;
+        newProjectile.setOwner(newOwner);
 
         world.playSound(null, target.getBlockPos(), EtherSounds.DEFLECT, target.getSoundCategory(), 0.5f, 1.0f);
         shield.damage(2, target, LivingEntity.getSlotForHand(target.getActiveHand()));
