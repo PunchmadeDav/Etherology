@@ -12,8 +12,8 @@ public class DispenserBehaviors {
 
     public static void registerAll() {
         DispenserBlock.registerBehavior(EItems.THUJA_OIL, new GeneratorDispenserBehavior());
-        DispenserBlock.registerBehavior(EItems.PEACH_BOAT, new BoatDispenserBehavior(BoatTypes.PEACH_TYPE.get()));
-        DispenserBlock.registerBehavior(EItems.PEACH_CHEST_BOAT, new BoatDispenserBehavior(BoatTypes.PEACH_TYPE.get(), true));
+        DispenserBlock.registerBehavior(EItems.PEACH_BOAT, new BoatDispenserBehavior(BoatTypes.PEACH));
+        DispenserBlock.registerBehavior(EItems.PEACH_CHEST_BOAT, new BoatDispenserBehavior(BoatTypes.PEACH, true));
         // PedestalDispenserBehavior is registering in DispenserBlockMixin
     }
 }

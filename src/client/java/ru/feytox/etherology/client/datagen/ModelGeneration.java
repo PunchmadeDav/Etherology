@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.BlockFamily;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.Identifier;
@@ -26,7 +27,8 @@ import static ru.feytox.etherology.registry.block.DecoBlocks.STRIPPED_PEACH_LOG;
 import static ru.feytox.etherology.registry.block.EBlockFamilies.FAMILIES;
 import static ru.feytox.etherology.registry.block.EBlocks.ETHEREAL_CHANNEL;
 import static ru.feytox.etherology.registry.block.EBlocks.ETHEREAL_FORK;
-import static ru.feytox.etherology.registry.item.ArmorItems.*;
+import static ru.feytox.etherology.registry.item.ArmorItems.ARMOR_ITEMS;
+import static ru.feytox.etherology.registry.item.ArmorItems.REVELATION_VIEW;
 import static ru.feytox.etherology.registry.item.DecoBlockItems.*;
 import static ru.feytox.etherology.registry.item.EItems.*;
 import static ru.feytox.etherology.registry.item.ToolItems.*;
@@ -74,12 +76,14 @@ public class ModelGeneration extends FabricModelProvider {
         registerItems(generator, Models.HANDHELD, ETHRIL_AXE, ETHRIL_PICKAXE, ETHRIL_HOE, ETHRIL_SHOVEL, ETHRIL_SWORD, EBONY_AXE, EBONY_PICKAXE, EBONY_HOE, EBONY_SHOVEL, EBONY_SWORD, STREAM_KEY, BROADSWORD);
         registerItems(generator, Models.HANDHELD, BATTLE_PICKAXES);
         registerItems(generator, Models.HANDHELD, RESONATING_WAND);
-        // armor
-        registerItems(generator, Models.GENERATED, ETHRIL_HELMET, ETHRIL_CHESTPLATE, ETHRIL_LEGGINGS, ETHRIL_BOOTS, EBONY_HELMET, EBONY_CHESTPLATE, EBONY_LEGGINGS, EBONY_BOOTS);
         // staff parts
         registerStaffParts(generator);
         // pattern tablets
         registerItems(generator, Models.GENERATED, PATTERN_TABLETS);
+
+        // armor
+        for (Item etherArmorItem : ARMOR_ITEMS)
+            generator.registerArmor((ArmorItem) etherArmorItem);
     }
 
     private static void registerBlockFamilies(BlockStateModelGenerator generator, List<BlockFamily> blockFamilies) {

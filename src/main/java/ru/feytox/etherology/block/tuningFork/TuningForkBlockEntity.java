@@ -6,13 +6,11 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.VibrationParticleEffect;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.event.BlockPositionSource;
 import net.minecraft.world.event.GameEvent;
 import net.minecraft.world.event.listener.GameEventListener;
@@ -26,6 +24,8 @@ import static ru.feytox.etherology.registry.block.EBlocks.TUNING_FORK_BLOCK_ENTI
 public class TuningForkBlockEntity extends TickableBlockEntity implements GameEventListener {
 
     private static final int RESONANCE_COOLDOWN = 30;
+    private static final ChunkTicketType<BlockPos> RESONANCE_TICKET = ChunkTicketType.create("etherology_resonance", Vec3i::compareTo, 100);
+
     @Getter
     private final BlockPositionSource positionSource;
     private int resonatingTicks = 0;
@@ -111,6 +111,7 @@ public class TuningForkBlockEntity extends TickableBlockEntity implements GameEv
         receivedNote = note;
         delay = MathHelper.floor(emitterPos.distanceTo(forkPos));
         world.spawnParticles(new VibrationParticleEffect(positionSource, delay), emitterPos.x, emitterPos.y, emitterPos.z, 1, 0.0, 0.0, 0.0, 0.0);
+        world.getChunkManager().addTicket(RESONANCE_TICKET, world.getChunk(pos).getPos(), 2, pos);
 
         return true;
     }
